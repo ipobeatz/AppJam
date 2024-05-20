@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:word_wise/main.dart';
 import 'package:word_wise/splashScreen.dart';
 
-void main() => runApp(Login());
-class Login extends StatefulWidget {
-  const Login({super.key});
+import 'homeScreen.dart';
+
+void main() => runApp(LoginScreen());
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreen();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-            color: Color(0xFF591818),
+            color: Color(0xFFFFFFFF),
           ),
           child: SingleChildScrollView(
             child: Stack(
@@ -161,10 +165,7 @@ class _LoginState extends State<Login> {
                           ),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context)=> MyApp()));
-
-
-
+                                builder: (context) => HomeScreen()));
                           },
                           child: Container(
                             width: 303,
