@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-            color: Color(0xFFFFFFFF),
+            color: Color(0xFFC91212),
           ),
           child: SingleChildScrollView(
             child: Stack(
