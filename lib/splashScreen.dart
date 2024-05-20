@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'loginScreen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -28,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => Main()));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => Login()));
     });
   }
 
@@ -61,19 +63,5 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
 }
-class Main extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Main Screen'),
-      ),
-      body: Center(
-        child: Text(
-          'This is the main screen',
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
-    );
-  }
-}
+
+

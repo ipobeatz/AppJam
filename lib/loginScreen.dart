@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:word_wise/splashScreen.dart';
 
 void main() => runApp(Login());
 class Login extends StatefulWidget {
@@ -159,6 +160,8 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context)=> MyApp()));
 
 
 
