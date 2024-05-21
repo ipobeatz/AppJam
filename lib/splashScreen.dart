@@ -36,28 +36,62 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.blue,
+    return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              Icons.android,
-              size: 100.0,
-              color: Colors.white,
+            Image.asset(
+              'assets/logo.png',
+              width: 600,
+              height: 300,
             ),
             SizedBox(height: 20.0),
-            Text(
-              'yo ',
+            GradientText(
+              'READQUEST',
               style: TextStyle(
-                fontSize: 24.0,
-                color: Colors.white,
+                fontSize: 35,
                 fontWeight: FontWeight.bold,
+                letterSpacing: 2.0,
+                shadows: [
+                  Shadow(
+                    blurRadius: 4.0,
+                    color: Colors.black45,
+                    offset: Offset(2, 2),
+                  ),
+                ],
+              ),
+              gradient: LinearGradient(
+                colors: [Colors.cyan, Colors.indigo],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class GradientText extends StatelessWidget {
+  final String text;
+  final TextStyle style;
+  final Gradient gradient;
+
+  GradientText(this.text, {required this.style, required this.gradient});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      blendMode: BlendMode.srcIn,
+      shaderCallback: (bounds) => gradient.createShader(
+        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+      ),
+      child: Text(
+        text,
+        style: style,
       ),
     );
   }

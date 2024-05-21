@@ -31,18 +31,18 @@ class _MyHomePageState extends State<MyHomePage> {
   int _correctAnswers = 0;
 
   final List<String> _questions = [
-    "Why does Anna go to the park?",
-    "What is Flutter?",
+    "What is your favorite book?",
+    "Who is the author of 'Harry Potter'?",
   ];
 
   final List<List<String>> _options = [
-    ["To Meet Friends", "To read her book", "To run", "To eat lunch"],
-    ["A programming language", "A UI toolkit", "A database", "A framework"],
+    ["'The Hobbit'", "'Pride and Prejudice'", "'Harry Potter'", "'To Kill a Mockingbird'"],
+    ["J.K. Rowling", "J.R.R. Tolkien", "George Orwell", "Jane Austen"]
   ];
 
   final List<String> _correctAnswersList = [
-    "To read her book",
-    "A UI toolkit",
+    "'Harry Potter'",
+    "J.K. Rowling",
   ];
 
   String _selectedAnswer = '';

@@ -242,7 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     _savedQuestions.contains(_questions[_pageController.hasClients ? _pageController.page?.toInt() ?? 0 : 0])
                         ? 'Remove from Saved'
-                        : 'Next Question',
+                        : 'Questions',
                   ),
                 ),
               ],

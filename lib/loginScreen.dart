@@ -65,17 +65,15 @@ class _LoginScreen extends State<LoginScreen> {
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 19.6),
                         child: Container(
+                          width: 60,
+                          height: 57.4,
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                'assets/images/oig_22_removebg_preview_2.png',
+                              image: AssetImage(
+                                'assets/logo.png',
                               ),
                             ),
-                          ),
-                          child: Container(
-                            width: 60,
-                            height: 57.4,
                           ),
                         ),
                       ),
@@ -160,6 +158,7 @@ class _LoginScreen extends State<LoginScreen> {
                               fontWeight: FontWeight.w400,
                               color: Color(0xBF000000),
                             ),
+                            obscureText: true, // Parola gizleme özelliği
                             // controller
                             controller: _password,
                           ),
@@ -188,18 +187,15 @@ class _LoginScreen extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: _login,
-                          child: Container(
-                            width: 303,
-                            child: Text(
-                              'Giriş Yap',
-                              style: GoogleFonts.getFont(
-                                'Poppins',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 24,
-                                color: Color(0xFFFFFFFF),
-                              ),
-                              textAlign: TextAlign.center,
+                          child: Text(
+                            'Giriş Yap',
+                            style: GoogleFonts.getFont(
+                              'Poppins',
+                              fontWeight: FontWeight.w700,
+                              fontSize: 24,
+                              color: Color(0xFFFFFFFF),
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),

@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:word_wise/loginScreen.dart';
 import 'package:word_wise/auth_services.dart';
 
-import 'auth_services.dart';
-
 void main() {
   runApp(const signUpScreen());
 }
@@ -92,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage('images/logocuk.png'),
+                              image: AssetImage('assets/logo.png'),
                             ),
                           ),
                           child: Container(
@@ -104,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container(
                         margin: EdgeInsets.fromLTRB(1, 0, 0, 20),
                         child: Text(
-                          'Kayıt Ol',
+                          'Giriş Yap',
                           style: GoogleFonts.getFont(
                             'Poppins',
                             fontWeight: FontWeight.w600,
@@ -229,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             fontWeight: FontWeight.w400,
                             color: Color(0xBF000000),
                           ),
+                          obscureText: true, // Parola gizleme özelliği
                           // controller
                           controller: _password,
                         ),
@@ -283,7 +282,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             TextButton(
                               onPressed: _signup,
                               child: Text(
-                                'Kayıt Ol',
+                                'Giriş Yap',
                                 style: GoogleFonts.getFont(
                                   'Poppins',
                                   fontWeight: FontWeight.w700,
