@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_wise/questionsAnswerScreen.dart';
+import 'package:word_wise/kullanici_profil.dart';
 
 class HomeScreen extends StatelessWidget {
   final String level;

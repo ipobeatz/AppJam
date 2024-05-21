@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:word_wise/chooseLevel.dart';
 import 'package:word_wise/main.dart';
+import 'package:word_wise/auth_services.dart';
+import 'package:word_wise/signUpScreen.dart';
 import 'package:word_wise/splashScreen.dart';
 
+import 'chooseLevel.dart';
 import 'homeScreen.dart';
 
 void main() => runApp(LoginScreen());
@@ -17,6 +19,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  final _auth = AuthService();
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,17 +57,26 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(39.9, 100, 39.9, 179), // Adjusted top padding for logo
+                  padding: EdgeInsets.fromLTRB(39.9, 174, 39.9, 179),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 19.6),
-                        child: Image.asset(
-                          'assets/loginicon.png', // Logo asset path
-                          width: 200,
-                          height: 200,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                'assets/images/oig_22_removebg_preview_2.png',
+                              ),
+                            ),
+                          ),
+                          child: Container(
+                            width: 60,
+                            height: 57.4,
+                          ),
                         ),
                       ),
                       Container(
@@ -102,14 +117,22 @@ class _LoginScreen extends State<LoginScreen> {
                         child: Container(
                           width: 303,
                           padding: EdgeInsets.fromLTRB(0, 12, 116.8, 10),
-                          child: Text(
-                            'Kullanıcı Adı',
-                            style: GoogleFonts.getFont(
-                              'Poppins',
-                              fontWeight: FontWeight.w400,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'Email',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.only(left: 15),
+                            ),
+                            style: TextStyle(
                               fontSize: 20,
+                              fontWeight: FontWeight.w400,
                               color: Color(0xBF000000),
                             ),
+                            // controller
+                            controller: _email,
                           ),
                         ),
                       ),
@@ -123,14 +146,22 @@ class _LoginScreen extends State<LoginScreen> {
                         child: Container(
                           width: 303,
                           padding: EdgeInsets.fromLTRB(0, 12, 173.2, 10),
-                          child: Text(
-                            'Parola',
-                            style: GoogleFonts.getFont(
-                              'Poppins',
-                              fontWeight: FontWeight.w400,
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: 'Parola',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              border: InputBorder.none,
+                              contentPadding: EdgeInsets.only(left: 15),
+                            ),
+                            style: TextStyle(
                               fontSize: 20,
+                              fontWeight: FontWeight.w400,
                               color: Color(0xBF000000),
                             ),
+                            // controller
+                            controller: _password,
                           ),
                         ),
                       ),
@@ -147,6 +178,7 @@ class _LoginScreen extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                        // Giriş Yap Butonu
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
@@ -155,10 +187,7 @@ class _LoginScreen extends State<LoginScreen> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ChooseLevel()));
-                          },
+                          onPressed: _login,
                           child: Container(
                             width: 303,
                             child: Text(
@@ -192,15 +221,22 @@ class _LoginScreen extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                            Text(
-                              'Kayıt Ol',
-                              style: GoogleFonts.getFont(
-                                'Poppins',
-                                fontWeight: FontWeight.w700,
-                                fontSize: 16,
-                                color: Color(0xFF0ABBFF),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => signUpScreen()));
+                              },
+                              child: Text(
+                                'Kayıt Ol',
+                                style: GoogleFonts.getFont(
+                                  'Poppins',
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Color(0xFF0ABBFF),
+                                ),
                               ),
                             ),
+
                           ],
                         ),
                       ),
@@ -213,5 +249,15 @@ class _LoginScreen extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  _login() async {
+    final user =
+    await _auth.loginUserWithEmailAndPassword(_email.text, _password.text);
+    if (user != null) {
+      print("User Logged In");
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ChooseLevel()));
+    }
   }
 }

@@ -6,11 +6,11 @@ import 'package:word_wise/auth_services.dart';
 import 'auth_services.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const signUpScreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class signUpScreen extends StatelessWidget {
+  const signUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
