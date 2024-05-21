@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:word_wise/chooseLevel.dart';
 import 'package:word_wise/main.dart';
 import 'package:word_wise/splashScreen.dart';
 
@@ -50,26 +51,17 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(39.9, 174, 39.9, 179),
+                  padding: EdgeInsets.fromLTRB(39.9, 100, 39.9, 179), // Adjusted top padding for logo
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 19.6),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                'assets/images/oig_22_removebg_preview_2.png',
-                              ),
-                            ),
-                          ),
-                          child: Container(
-                            width: 60,
-                            height: 57.4,
-                          ),
+                        child: Image.asset(
+                          'assets/loginicon.png', // Logo asset path
+                          width: 200,
+                          height: 200,
                         ),
                       ),
                       Container(
@@ -165,7 +157,7 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                                builder: (context) => ChooseLevel()));
                           },
                           child: Container(
                             width: 303,

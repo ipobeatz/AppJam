@@ -73,7 +73,7 @@ class Login extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => HomeScreen()));
+                builder: (context) => HomeScreen(level: 'A1-A2'))); // 'A1-A2' seviyesini örnek olarak ekliyorum
           },
           child: Text('Login'),
         ),

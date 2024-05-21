@@ -1,58 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:word_wise/loginScreen.dart';
-import 'package:word_wise/splashScreen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final String level;
+  const HomeScreen({super.key, required this.level});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MyHomePage(title: 'Word Wise'),
+      home: MyHomePage(title: 'Word Wise', level: level),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
   final String title;
+  final String level;
+  const MyHomePage({super.key, required this.title, required this.level});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 1; // Default olarak Home Page seçili olacak
+  int _selectedIndex = 1;
   final PageController _pageController = PageController(initialPage: 0);
-  final List<String> _questions = [
-    "Question 1: What is Flutter?",
-    "Question 2: What is Dart?",
-    "Question 3: What is a Widget?",
-    "Question 4: Explain Stateful and Stateless Widgets.",
-    "Question 5: What is State Management?",
-    "Question 6: Explain Navigator in Flutter.",
-    "Question 7: What is the use of setState?",
-    "Question 8: Explain InheritedWidget.",
-    "Question 9: What is a Future in Dart?",
-    "Question 10: What is an Async/Await in Dart?"
-  ];
-  final List<String> _answers = [
-    "Answer 1: Flutter is an open-source UI software development toolkit created by Google.",
-    "Answer 2: Dart is a programming language optimized for building mobile, desktop, server, and web applications.",
-    "Answer 3: A widget is an immutable description of part of a user interface.",
-    "Answer 4: Stateful widgets maintain state that might change during the lifetime of the widget. Stateless widgets do not.",
-    "Answer 5: State management refers to the management of the state of one or more UI controls.",
-    "Answer 6: Navigator is a widget that manages a set of child widgets with a stack discipline.",
-    "Answer 7: setState() is a method used to update the state of a stateful widget.",
-    "Answer 8: InheritedWidget is a base class for widgets that efficiently propagate information down the tree.",
-    "Answer 9: A Future is a means for getting a value sometime in the future.",
-    "Answer 10: Async/await is a way to handle asynchronous operations in Dart."
-  ];
+  List<String> _questions = [];
+  List<String> _answers = [];
+
   List<String> _savedQuestions = [];
   bool _showFrontSide = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeQuestionsAndAnswers(widget.level);
+  }
+
+  void _initializeQuestionsAndAnswers(String level) {
+    if (level == 'A1-A2') {
+      _questions = [
+        "A1-A2: What is Flutter?",
+        "A1-A2: What is Dart?",
+        // More A1-A2 questions
+      ];
+      _answers = [
+        "A1-A2: Flutter is an open-source UI software development toolkit created by Google.",
+        "A1-A2: Dart is a programming language optimized for building mobile, desktop, server, and web applications.",
+        // More A1-A2 answers
+      ];
+    } else if (level == 'B1-B2') {
+      _questions = [
+        "B1-B2: What is Flutter?",
+        "B1-B2: What is Dart?",
+        // More B1-B2 questions
+      ];
+      _answers = [
+        "B1-B2: Flutter is an open-source UI software development toolkit created by Google.",
+        "B1-B2: Dart is a programming language optimized for building mobile, desktop, server, and web applications.",
+        // More B1-B2 answers
+      ];
+    } else if (level == 'C1-C2') {
+      _questions = [
+        "C1-C2: What is Flutter?",
+        "C1-C2: What is Dart?",
+        // More C1-C2 questions
+      ];
+      _answers = [
+        "C1-C2: Flutter is an open-source UI software development toolkit created by Google.",
+        "C1-C2: Dart is a programming language optimized for building mobile, desktop, server, and web applications.",
+        // More C1-C2 answers
+      ];
+    }
+  }
 
   void _toggleQuestionInSaved() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -93,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width * 0.1,
             height: MediaQuery.of(context).size.height * 0.7,
             child: Card(
-              color: Colors.red,
+              color: Colors.red[200],
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -119,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             width: MediaQuery.of(context).size.width * 0.1,
             height: MediaQuery.of(context).size.height * 0.7,
             child: Card(
-              color: Colors.blue,
+              color: Colors.blue[100],
               elevation: 8,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -167,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: _showFrontSide
                               ? Card(
                             key: ValueKey<bool>(_showFrontSide),
-                            color: Colors.white,
+                            color: Colors.pink[50],
                             elevation: 8,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35),
