@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:word_wise/questionsAnswerScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   final String level;
@@ -41,13 +42,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _initializeQuestionsAndAnswers(String level) {
     if (level == 'A1-A2') {
       _questions = [
-        "A1-A2: What is Flutter?",
-        "A1-A2: What is Dart?",
+        "Book",
+        "Dog",
+        "Water",
         // More A1-A2 questions
       ];
       _answers = [
-        "A1-A2: Flutter is an open-source UI software development toolkit created by Google.",
-        "A1-A2: Dart is a programming language optimized for building mobile, desktop, server, and web applications.",
+        "I borrowed a book from the library yesterday.",
+        "We have a friendly dog that loves to play in the park.",
+        "It is important to drink plenty of water every day.",
         // More A1-A2 answers
       ];
     } else if (level == 'B1-B2') {
@@ -87,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       });
     });
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => QuestionsAnswerScreen()));
   }
 
   void _toggleCardSide() {
@@ -165,6 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  '${_savedQuestions.length}/${_questions.length}',
+                  style: GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
                 Expanded(
                   child: PageView.builder(
                     controller: _pageController,
@@ -188,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: _showFrontSide
                               ? Card(
                             key: ValueKey<bool>(_showFrontSide),
-                            color: Colors.pink[50],
+                            color: Colors.red[300],
                             elevation: 8,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35),
@@ -206,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                               : Card(
                             key: ValueKey<bool>(_showFrontSide),
-                            color: Colors.white,
+                            color: Colors.blue[200],
                             elevation: 8,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(35),
@@ -281,6 +289,25 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class NextQuestionScreen extends StatelessWidget {
+  const NextQuestionScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Next Question'),
+      ),
+      body: Center(
+        child: Text(
+          'This is the next question screen.',
+          style: GoogleFonts.lato(fontSize: 24),
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -6,8 +7,14 @@ import 'package:word_wise/homeScreen.dart';
 import 'package:word_wise/loginScreen.dart';
 import 'package:word_wise/splashScreen.dart';
 
-void main() {
-  runApp(const BaseFragment());
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class BaseFragment extends StatelessWidget {
