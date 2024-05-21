@@ -210,7 +210,7 @@ class _LoginScreen extends State<LoginScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 7.7, 0),
+                              margin: EdgeInsets.fromLTRB(11, 12, 0, 0),
                               child: Text(
                                 'Hesabın mevcut değil mi?',
                                 style: GoogleFonts.getFont(
@@ -236,7 +236,6 @@ class _LoginScreen extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                       ),

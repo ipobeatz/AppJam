@@ -13,7 +13,7 @@ class UserProfileScreen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   width: double.infinity,
-                  height: 209,
+                  height: 280,
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.4), // %40 saydamlık
                     borderRadius: BorderRadius.only(
@@ -29,10 +29,10 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 100, // Fotoğrafın üst kısmı için konumlandırma
+                  top: 80, // Fotoğrafın üst kısmı için konumlandırma
                   child: Container(
-                    width: 100,
-                    height: 100,
+                    width: 160,
+                    height: 160,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -41,7 +41,7 @@ class UserProfileScreen extends StatelessWidget {
                       ),
                       image: DecorationImage(
                         image: AssetImage(
-                            'assets/kullaniciprofilfoto.jpg'), // Profil fotoğrafı
+                            'assets/canavar.jpeg'), // Profil fotoğrafı
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -49,7 +49,7 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 70), // Fotoğraf ile isim arasında boşluk
+            SizedBox(height: 35), // Fotoğraf ile isim arasında boşluk
 
             // Kullanıcı ismi
             Container(
@@ -62,7 +62,7 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Kullanıcı Adı', // Örnek kullanıcı adı
+                'Hakan Çevik', // Örnek kullanıcı adı
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,

@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:word_wise/questionsAnswerScreen.dart';
-import 'package:word_wise/kullanici_profil.dart';
+import 'package:word_wise/translation_service.dart';
+
+import 'kullanici_profil.dart';
+
+void main() => runApp(HomeScreen(level: 'A1-A2'));
 
 class HomeScreen extends StatelessWidget {
   final String level;
@@ -30,7 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   final PageController _pageController = PageController(initialPage: 0);
   List<String> _questions = [];
   List<String> _answers = [];
-
   List<String> _savedQuestions = [];
   bool _showFrontSide = true;
 
@@ -170,10 +174,6 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  '${_savedQuestions.length}/${_questions.length}',
-                  style: GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
                 Expanded(
                   child: PageView.builder(
                     controller: _pageController,
@@ -251,13 +251,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     ),
-    Center(child: Text('Profile Page')),
+    UserProfileScreen(), // Profil sayfası burada ekleniyor
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 0) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => TranslatorScreen()));
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
@@ -295,25 +299,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class NextQuestionScreen extends StatelessWidget {
-  const NextQuestionScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Next Question'),
-      ),
-      body: Center(
-        child: Text(
-          'This is the next question screen.',
-          style: GoogleFonts.lato(fontSize: 24),
-        ),
-      ),
-    );
-  }
-}
-
 class RotationYTransition extends AnimatedWidget {
   final Widget child;
   final Animation<double> animation;
@@ -336,6 +321,91 @@ class RotationYTransition extends AnimatedWidget {
         child: child,
       )
           : child,
+    );
+  }
+}
+
+// TranslatorScreen class
+class TranslatorScreen extends StatefulWidget {
+  @override
+  _TranslatorScreenState createState() => _TranslatorScreenState();
+}
+
+class _TranslatorScreenState extends State<TranslatorScreen> {
+  final TextEditingController _controller = TextEditingController();
+  String _translatedWord = '';
+  bool _isLoading = false;
+  String _errorMessage = '';
+
+  void _translateWord() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+
+    try {
+      final translatedWord = await translateToTurkish(_controller.text);
+      final firstWord = translatedWord.split(' ')[0]; // Çeviri sonucundan ilk kelimeyi alın
+
+      setState(() {
+        _translatedWord = firstWord;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        _errorMessage = 'Error translating word';
+      });
+    }
+  }
+
+  Widget _buildTranslationResult() {
+    if (_isLoading) {
+      return CircularProgressIndicator();
+    } else if (_errorMessage.isNotEmpty) {
+      return Text(_errorMessage, style: TextStyle(color: Colors.red));
+    } else if (_translatedWord.isNotEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Çeviri: $_translatedWord',
+            style: TextStyle(fontSize: 18, color: Colors.green),
+          ),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Word Translator'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                labelText: 'Enter a word',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _translateWord,
+              child: Text('Translate'),
+            ),
+            SizedBox(height: 20),
+            _buildTranslationResult(),
+          ],
+        ),
+      ),
     );
   }
 }
